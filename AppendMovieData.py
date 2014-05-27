@@ -16,11 +16,14 @@ M9 = []
 M10 = []
 M11 = []
 M12 = []
-#edit the argument in requests.get() to your target genre directory - otherwise this will scrape the wrong thing. Example is provided below.
+#edit the argument in requests.get() to your target genre directory - otherwise this will scrape the wrong thing. 
+#Example is provided below.
 r = requests.get('http://www.boxofficemojo.com/genres/chart/?view=main&sort=gross&order=DESC&pagenum=1&id=scifiadventure.htm')
 soup = BeautifulSoup(r.text)
-#findid basically finds you the boxoffice movie id to plug into retrieve_incomes. It's written so that pesky characters in brackets will be ignored.
-#Apparently, this tactic will only cost us data about (500) Days of Summer and movies that end with year of release in their titles, a small fraction of most movies.
+#findid basically finds you the boxoffice movie id to plug into retrieve_incomes. It's written so that pesky 
+#characters in brackets will be ignored.
+#Apparently, this tactic will only cost us data about (500) Days of Summer and movies that end with year of 
+#release in their titles, a small fraction of most movies.
 def findid(n):
     if str(n).endswith(')'):
         m = str(n)[:str(n).find('(')]
