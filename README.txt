@@ -6,12 +6,14 @@ Works only on Python 2.7.6. and below. Can be adjusted for Python 3 and above if
 
 In order to ensure you have correct components, make sure you have the following three modules in place:
 
-1. boxofficemojo.py (courtesy Claudio B.) #retrieves weekly incomes for given movie id
-2. download.py (courtesy Claudio B.) #accesses the weekly incomes page via http
+1. boxofficemojo.py (author: Claudio Baccigalupo) #retrieves weekly incomes for given movie id
+2. download.py (author: Claudio Baccigalupo) #accesses the weekly incomes page via http
 3. AppendMovieData.py #identifies list of movie ids from genre directory, scrapes relevant data using boxofficemojo and itself, and reads into appropriate files.
    #currently, all movie data is sorted by month of release
 4. Requests library
 5. Beautiful Soup 4 library
+
+Files listed with Claudio Baccigalupo as author were taken from https://github.com/claudiob/boxoffice, before I knew how to fork a respository (and now it's too late).
 
 Other components that are not absolutely necessary, but recommended in case of mistakes:
 
