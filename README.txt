@@ -22,19 +22,13 @@ Other components that are not absolutely necessary, but recommended in case of m
 
 Recommended Instructions:
 
-1. On downloading the screen scraper and necessary modules (.py files) and the data (.txt files) into a suitable folder (called A, for example), MOVE the .py files to a separate folder (say B). 
-This is to ensure Film Count.py does not overestimate the number of movies actually contained.
+1. Change all the directories within each AppendMovieData.py, DuplicateRemove.py and Film Count.py to A. This ensures proper appending and accounting.
 
-2. Change all the directories within each AppendMovieData.py, DuplicateRemove.py and Film Count.py to A. This ensures proper appending and accounting.
-
-3. To use the screen scraper, identify your target genre directory. An example is provided in AppendMovieData.py. Make careful note of the number of films each page in the genre sub-directory.
+2. To use the screen scraper, identify your target genre directory. An example is provided in AppendMovieData.py. Make careful note of the number of films each page in the genre sub-directory.
 This number will allow you to identify how much of the page is to be scripted. Further instructions are provided in AppendMovieData.py. MAKE SURE your internet connection is working.
 If internet connection cannot be established, the screen scraper will not work.
 
-4. It is always best to perform quality control. Use DuplicateRemove.py to make sure duplicate records of movies, which can happen if you accidentally run the screen scraper on the same genre directory twice, are not preserved.
+3. It is always best to perform quality control. Use DuplicateRemove.py to make sure duplicate records of movies, which can exist if you accidentally run the screen scraper on the same genre directory twice, are not preserved.
 Make sure to individually read from one file, but write to a new file separately, for ease of use when using DuplicateRemove.py. You can use Film Count.py at any time to find out how many movies have been scraped.
 
 Please study the .py files themselves to understand how they work. 
-
-Additional Notes: For most purposes, these files will work. However, there are some things it cannot do. It will not scrape weekly incomes for movies on the genre directory with (#insert year here). e.g. Alice in Wonderland (2010) will not be scraped for lifetime weekly income.
-However, such movies are small in number, and we can always rewrite the code to specially retrieve these incomes.
