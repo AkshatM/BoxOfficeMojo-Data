@@ -3,6 +3,7 @@ import os
 from bs4 import BeautifulSoup
 from boxofficemojo import retrieve_incomes
 import string
+
 L = []
 M1 = []
 M2 = []
@@ -16,24 +17,33 @@ M9 = []
 M10 = []
 M11 = []
 M12 = []
+
 #edit the argument in requests.get() to your target genre directory - otherwise this will scrape the wrong thing. 
 #Example is provided below.
+
 r = requests.get('http://www.boxofficemojo.com/genres/chart/?view=main&sort=gross&order=DESC&pagenum=1&id=scifiadventure.htm')
 soup = BeautifulSoup(r.text)
-#findid basically finds you the boxoffice movie id to plug into retrieve_incomes. It's written so that pesky 
-#characters in brackets will be ignored.
-#Apparently, this tactic will only cost us data about (500) Days of Summer and movies that end with year of 
-#release in their titles, a small fraction of most movies.
+
+#findid basically finds you theboxoffice movie id to plug into retrieve_incomes. It's written so that pesky 
+#characters in brackets (e.g. name of the country movie comes from) will be ignored. Code, however, will ignore numerical 
+#characters (e.g. Alice in Wonderland (2010)), as BoxOfficeMojo inevitably incorporates year of release into its movie id list,
+# in the event of multiple movies sharing the same name, and without the year, hunting for the ids will return nothing.
 def findid(n):
     if str(n).endswith(')'):
-        m = str(n)[:str(n).find('(')]
+        try:
+            int(n[str(n).find('(')+1:-1])
+            m = str(n)
+        except ValueError:
+            m = str(n)[:str(n).find('(')]
         for link in soup.findAll('a', href=True, text=str(m)):
             return link['href'][12:-4]
     else:
         for link in soup.findAll('a', href=True, text=str(n)):
             return link['href'][12:-4]
+
 for line in soup("tr"):
     L.append(line.get_text())
+    
 for x in L[4:76]:#change slice to 4:104 unless number of movies on page less than 100; then change 104 to 'number of movies' + 4 in the page you're scraping
     y = str(x).split('\n')
     if y[7].startswith('1/'):
