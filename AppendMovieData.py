@@ -4,6 +4,12 @@ from bs4 import BeautifulSoup
 from boxofficemojo import retrieve_incomes
 import string
 
+path = r'C:/Users/Akshat Mahajan/Desktop/Scraper/Movie Data' #change file name to where you want your data to be saved.
+os.chdir(path)
+
+# The data returned by this code consists (in order) of movie name, lifetime gross, opening weekend box office revenue,
+# and then the weekly box office revenue, stretching as long as BoxOfficeMojo holds the data.
+
 L = []
 M1 = []
 M2 = []
@@ -108,51 +114,51 @@ for x in L[4:76]:#change slice to 4:104 unless number of movies on page less tha
         M12.append(y[1] + ', ' + string.lower(y[3].replace(' ','')).translate(string.maketrans("",""), string.punctuation)+', ' + string.lower(y[5].replace(' ','')).translate(string.maketrans("",""), string.punctuation)+', ' + N[:-1]+'\n')
 #when creating data, change 'a' in file attribute (last option) to 'w'; when appending, change 'w' to 'a'
 #change the first argument in open(os.path.join()) to a folder you want to store the data in, and the second argument to the file name you want to write to.
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'January Movies.csv'),'a')
+f = open('January Movies.csv','a')
 for x in M1:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'February Movies.csv'),'a')
+f = open('February Movies.csv','a')
 for x in M2:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'March Movies.csv'),'a') 
+f = open('March Movies.csv','a') 
 for x in M3:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'April Movies.csv'),'a') 
+f = open('April Movies.csv','a') 
 for x in M4:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'May Movies.csv'),'a')
+f = open('May Movies.csv','a')
 for x in M5:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'June Movies.csv'),'a')
+f = open('June Movies.csv','a')
 for x in M6:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'July Movies.csv'),'a')
+f = open('July Movies.csv','a')
 for x in M7:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'August Movies.csv'),'a')
+f = open('August Movies.csv','a')
 for x in M8:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'September Movies.csv'),'a')
+f = open('September Movies.csv','a')
 for x in M9:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'October Movies.csv'),'a') 
+f = open('October Movies.csv','a') 
 for x in M10:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'November Movies.csv'),'a')
+f = open('November Movies.csv','a')
 for x in M11:
     f.write(x)
 f.close()
-f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', 'December Movies.csv'),'a') 
+f = open('December Movies.csv','a') 
 for x in M12:
     f.write(x)
 f.close()
