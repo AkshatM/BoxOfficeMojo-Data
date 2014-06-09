@@ -22,13 +22,10 @@ Other components that are not absolutely necessary, but recommended in case of m
 
 Recommended Instructions:
 
-1. Change all the directories within each AppendMovieData.py, DuplicateRemove.py and Film Count.py to A. This ensures proper appending and accounting.
+1. Change all the directories within each AppendMovieData.py, DuplicateRemove.py and Film Count.py to your desired directory (the string in the variable name 'path'), where your data will be stored. This ensures proper appending and accounting.
 
-2. To use the screen scraper, identify your target genre directory. An example is provided in AppendMovieData.py. Make careful note of the number of films each page in the genre sub-directory.
-This number will allow you to identify how much of the page is to be scripted. Further instructions are provided in AppendMovieData.py. MAKE SURE your internet connection is working.
-If internet connection cannot be established, the screen scraper will not work.
+2. To use the screen scraper, identify your target genre directory. An example is provided in AppendMovieData.py. Make careful note of the number of films each page in the genre sub-directory. This number will allow you to identify how much of the page is to be scripted. Further instructions are provided in AppendMovieData.py. MAKE SURE your internet connection is working. If internet connection cannot be established, the screen scraper will not work.
 
-3. It is always best to perform quality control. Use DuplicateRemove.py to make sure duplicate records of movies, which can exist if you accidentally run the screen scraper on the same genre directory twice, are not preserved.
-Make sure to individually read from one file, but write to a new file separately, for ease of use when using DuplicateRemove.py. You can use Film Count.py at any time to find out how many movies have been scraped.
+3. It is always best to perform quality control. Use DuplicateRemove.py to make sure duplicate records of movies, which can exist if you accidentally run the screen scraper on the same genre directory twice, are not preserved. Make sure to individually read from one file, but write to a new file separately, for ease of use when using DuplicateRemove.py. You can use Film Count.py at any time to find out how many movies have been scraped.
 
 Please study the .py files themselves to understand how they work. 
