@@ -4,12 +4,12 @@ from bs4 import BeautifulSoup
 from boxofficemojo import retrieve_incomes
 import string
 
-path = r'C:/Users/Akshat Mahajan/Desktop/Scraper/Movie Data' #change file name to where you want your data to be saved.
+path = r'C:\Users\Akshat Mahajan\Desktop\Scraper\Experimental-Screen-Scraping/Movie Data' #change file name to where you want your data to be saved.
 os.chdir(path)
 
 # The data returned by this code consists (in order) of movie name, lifetime gross, opening weekend box office revenue,
 # and then the weekly box office revenue, stretching as long as BoxOfficeMojo holds the data.
-
+print 'Initialising...'
 L = []
 M1 = []
 M2 = []
@@ -27,9 +27,9 @@ M12 = []
 #edit the argument in requests.get() to your target genre directory - otherwise this will scrape the wrong thing. 
 #Example is provided below.
 
-r = requests.get('http://www.boxofficemojo.com/genres/chart/?view=main&sort=gross&order=DESC&pagenum=1&id=scifiadventure.htm')
+r = requests.get('http://www.boxofficemojo.com/genres/chart/?view=main&sort=gross&order=DESC&pagenum=1&id=foreign.htm')
 soup = BeautifulSoup(r.text)
-
+print 'Retrieved desired web page...'
 #findid basically finds you theboxoffice movie id to plug into retrieve_incomes. It's written so that pesky 
 #characters in brackets (e.g. name of the country movie comes from) will be ignored. Code, however, will ignore numerical 
 #characters (e.g. Alice in Wonderland (2010)), as BoxOfficeMojo inevitably incorporates year of release into its movie id list,
@@ -49,7 +49,7 @@ def findid(n):
 
 for line in soup("tr"):
     L.append(line.get_text())
-    
+print 'Parsing...'    
 for x in L[4:76]:#change slice to 4:104 unless number of movies on page less than 100; then change 104 to 'number of movies' + 4 in the page you're scraping
     y = str(x).split('\n')
     if y[7].startswith('1/'):
@@ -114,51 +114,53 @@ for x in L[4:76]:#change slice to 4:104 unless number of movies on page less tha
         M12.append(y[1] + ', ' + string.lower(y[3].replace(' ','')).translate(string.maketrans("",""), string.punctuation)+', ' + string.lower(y[5].replace(' ','')).translate(string.maketrans("",""), string.punctuation)+', ' + N[:-1]+'\n')
 #when creating data, change 'a' in file attribute (last option) to 'w'; when appending, change 'w' to 'a'
 #change the first argument in open(os.path.join()) to a folder you want to store the data in, and the second argument to the file name you want to write to.
-f = open('January Movies.csv','a')
+print 'Sorting and saving ...'
+f = open('January Movies.txt','a')
 for x in M1:
     f.write(x)
 f.close()
-f = open('February Movies.csv','a')
+f = open('February Movies.txt','a')
 for x in M2:
     f.write(x)
 f.close()
-f = open('March Movies.csv','a') 
+f = open('March Movies.txt','a') 
 for x in M3:
     f.write(x)
 f.close()
-f = open('April Movies.csv','a') 
+f = open('April Movies.txt','a') 
 for x in M4:
     f.write(x)
 f.close()
-f = open('May Movies.csv','a')
+f = open('May Movies.txt','a')
 for x in M5:
     f.write(x)
 f.close()
-f = open('June Movies.csv','a')
+f = open('June Movies.txt','a')
 for x in M6:
     f.write(x)
 f.close()
-f = open('July Movies.csv','a')
+f = open('July Movies.txt','a')
 for x in M7:
     f.write(x)
 f.close()
-f = open('August Movies.csv','a')
+f = open('August Movies.txt','a')
 for x in M8:
     f.write(x)
 f.close()
-f = open('September Movies.csv','a')
+f = open('September Movies.txt','a')
 for x in M9:
     f.write(x)
 f.close()
-f = open('October Movies.csv','a') 
+f = open('October Movies.txt','a') 
 for x in M10:
     f.write(x)
 f.close()
-f = open('November Movies.csv','a')
+f = open('November Movies.txt','a')
 for x in M11:
     f.write(x)
 f.close()
-f = open('December Movies.csv','a') 
+f = open('December Movies.txt','a') 
 for x in M12:
     f.write(x)
 f.close()
+print 'Process finished.'

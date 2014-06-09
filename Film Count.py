@@ -1,9 +1,11 @@
 #this code will tell you how many films you have in your directory
 import os
+path = r'C:\Users\Akshat Mahajan\Desktop\Scraper\Experimental-Screen-Scraping\Movie Data'
 L = 0
-for x in os.listdir('C:/Users/Akshat Mahajan/Desktop/Movie Data'):
-    f = open(os.path.join('C:/Users/Akshat Mahajan/Desktop/Movie Data', x),'r')
+os.chdir(path)
+for x in os.listdir(path):
+    f = open(x),'r')
     for y in f:
         L+=1
     f.close()
-print L-12
+print L
