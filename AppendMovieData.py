@@ -49,7 +49,8 @@ def findid(n):
 
 for line in soup("tr"):
     L.append(line.get_text())
-print 'Parsing...'    
+print 'Parsing...'
+
 for x in L[4:76]:#change slice to 4:104 unless number of movies on page less than 100; then change 104 to 'number of movies' + 4 in the page you're scraping
     y = str(x).split('\n')
     if y[7].startswith('1/'):
@@ -107,7 +108,7 @@ for x in L[4:76]:#change slice to 4:104 unless number of movies on page less tha
         for x in retrieve_incomes(findid(y[1]),full_week=False,use_cumes=False)['values']:
             N = N + str(x) + ', '
         M11.append(y[1] + ', ' + string.lower(y[3].replace(' ','')).translate(string.maketrans("",""), string.punctuation)+', ' + string.lower(y[5].replace(' ','')).translate(string.maketrans("",""), string.punctuation)+', ' + N[:-1]+'\n')
-    if y[7].startswith('5/'):
+    if y[7].startswith('12/'):
         N = ''
         for x in retrieve_incomes(findid(y[1]),full_week=False,use_cumes=False)['values']:
             N = N + str(x) + ', '
