@@ -1,5 +1,9 @@
 README FOR BOXOFFICEMOJO SCREEN SCRAPER.
 
+This program is designed to scrape weekly box office returns for several movies simultaneously from Box Office Mojo, and to save the results on to a folder on your computer.
+Output is a series of twelve text files (corresponding to month of release) which contain movie names (and corresponding weekly box office returns in comma-separated format)
+in that month.
+
 Author: Akshat Mahajan
 
 Works only on Python 2.7.6. and below. Can be adjusted for Python 3 and above if you're willing to do the work.
