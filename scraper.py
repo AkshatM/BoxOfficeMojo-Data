@@ -1,24 +1,15 @@
 import requests
-import os
 from bs4 import BeautifulSoup
-import string
 
-path = r'C:\Users\Akshat Mahajan\Desktop\Data' #change file name to where you want your data to be saved.
+def get_table_from(url):
 
-# The data returned by this code consists (in order) of movie name, lifetime gross, opening weekend box office revenue,
-# and then the weekly box office revenue, stretching as long as BoxOfficeMojo holds the data.
+    '''Returns a BeautifulSoup object containing all the 'tr' tags on the requested URL.
 
-print 'Initialising...'
+    Does some simple checking to ensure provided URL is in fact valid for BoxOfficeMojo only.''' 
 
-L = []
-
-#edit the argument in requests.get() to your target genre directory - otherwise this will scrape the wrong thing. 
-#Example is provided below.
-
-r = requests.get('http://www.boxofficemojo.com/seasonal/?view=releasedate&yr=2015&season=Summer')
-
-soup = BeautifulSoup(r.text)
-
-print 'Retrieved table on desired web page...'
-    
-print 'Process finished'
+    if 'boxofficemojo.com' in url:
+        response = requests.get(url)
+        soup_object = BeautifulSoup(response.text)
+        return soup_object
+    else:
+        raise ValueError('URL is not a boxofficemojo.com URL')
