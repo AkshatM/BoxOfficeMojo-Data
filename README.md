@@ -6,16 +6,21 @@ If you came here before and are confused about just how much this project has ch
 
 If you're interested in working with the original version of this repository, it's still here - simply jump to the branch named 'original' in this repository, and pull from there.
 
-#Blueprints for Design
 
-BoxOfficeMojo-Data should:
-* Be able to handle _all_ major tables that appear on BoxOfficeMojo-Data pages, rather than be limited to specific Genre pages. Support will _not_ be maintained for objects on a BoxOfficeMojo page that doesn't contain a table.
-* Intelligently parse through tables on a page, and allow users to decide how to group variables to store in a file.
-* Allow users to make use of _utilities_ that can come in handy when storing scraped data.
+# Dependencies
 
-BoxOfficeMojo's behaviour should resemble that of an API, and make _no_ assumptions about what the user should do with the data. In that regard, it should behave like a proper object-oriented Pythonic library, providing people the flexibility to choose how to handle and treat the data.
+As of now, BoxOfficeMojo-Data functions depend on:
+
+* [Requests](http://docs.python-requests.org/en/latest/)
+* [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* [Pandas](http://pandas.pydata.org/) (in future commits)
 
 # Current Structure
 
 This repository currently contains:
-* `scraper.py`, a scraper function that takes in a URL and returns a BeautifulSoup object representing all the `tr` tags within the page. _This will be improved upon in a forthcoming commit, where it should return an object representing the single major page of that list_.
+* `scraper.py`, a collection of scraping functions
+  * 'get_table_from(_url_)` - Takes in a valid BoxOfficeMojo URL and returns a list of raw HTML tables containing data on the URL. To accomplish this task, it looks for all tables whose `tr` contains and attribute `bgcolor = #dcdcdc`. This pattern is consistent across BoxOfficeMojo, and enables easy grouping of all significant tables on the page. 
+
+# Future Improvements
+
+* Return our raw HTML tables as cleverly parsed dataframe objects using `pandas`. Ideally, this would require an internal conversion of the tables to lists within lists, which can be accomplished through list comprehensions and iterations over the elements of the table.
