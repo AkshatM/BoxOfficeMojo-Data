@@ -19,8 +19,8 @@ As of now, BoxOfficeMojo-Data functions depend on:
 
 This repository currently contains:
 * `scraper.py`, a collection of scraping functions
-  * `get_table_from(_url_)` - Takes in a valid BoxOfficeMojo URL and returns a list of raw HTML tables containing data on the URL. To accomplish this task, it looks for all tables whose `tr` contains and attribute `bgcolor = #dcdcdc`. This pattern is consistent across BoxOfficeMojo, and enables easy grouping of all significant tables on the page. 
+  * `get_table_from(_url_)` - Takes in a valid BoxOfficeMojo URL and returns a list of parsed HTML tables, which are presented as nested lists. To accomplish this task, it looks for all tables whose `tr` contains and attribute `bgcolor = #dcdcdc`. This pattern is consistent across BoxOfficeMojo, and enables easy grouping of all significant tables on the page. 
 
 # Future Improvements
 
-* Return our raw HTML tables as cleverly parsed dataframe objects using `pandas`. Ideally, this would require an internal conversion of the tables to lists within lists, which can be accomplished through list comprehensions and iterations over the elements of the table.
+* Return our parsed HTML tables as cleverly parsed dataframe objects using `pandas`. Ideally, this would require an internal conversion of the tables to lists within lists, which can be accomplished through list comprehensions and iterations over the elements of the table.
