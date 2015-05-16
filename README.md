@@ -20,6 +20,10 @@ As of now, BoxOfficeMojo-Data functions depend on:
 * [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 * [Pandas](http://pandas.pydata.org/)
 
+# Installation
+
+For now, all you can do is clone this repository somewhere and put both files in your pythonpath. Sorry about that - a future version will probably be released on PyPi, so pip installation will work then, or a setup script will let that happen.
+
 # Current Structure
 
 This repository currently contains:
