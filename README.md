@@ -18,7 +18,7 @@ This tool does not qualify as data mining or screen scraping, as it does not fac
 As of now, BoxOfficeMojo-Data functions depend on:
 
 * [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-* [Pandas](http://pandas.pydata.org/) (in future commits)
+* [Pandas](http://pandas.pydata.org/)
 
 # Current Structure
 
@@ -26,16 +26,35 @@ This repository currently contains:
 * `scraper.py`, a collection of parsing functions
   * `get_table_from(*page_html*, _cleaned_ = False, _stripped_ = True)`
 
----Returns formatted_tables, a list of DataFrame objects corresponding to tables on the page_html corresponding to a BOM page format.
+   Returns formatted_tables, a list of DataFrame objects corresponding to tables on the page_html corresponding to a BOM page format.
 
----If that doesn't happen, returns a list of lists. The innermost lists represents rows within a table; the outer lists represents a table.The elements of the innermost lists are all strings.
+   If that doesn't happen, returns a list of lists. The innermost lists represents rows within a table; the outer lists represents a table.The elements of the innermost lists are all strings.
 
----If cleaned is set to True, the 'clean' utility is called to try to force the table into a DataFrame object. 'clean' is set to False because the vast majority of cases on boxofficemojo don't require the extra overhead. 
+   If cleaned is set to True, the 'clean' utility is called to try to force the table into a DataFrame object. 'clean' is set to False because the vast majority of cases on boxofficemojo will convert to DataFrame objects without error and will convert to DataFrame objects without fuss. *Only* use if the result is a nested list rather than a DataFrame object, otherwise risk the penalty for ignoring instructions. 
 
----This strips a lot of content that might be unwanted. Unwanted content include nested tables, Javascript script and option attributes, and HTML forms. If you want to retrieve this content, for whatever reason, set stripped to False, and it will return a list of the unwanted strings along with formatted_tables.
+   This strips a lot of content that might be unwanted. Unwanted content include nested tables, Javascript script and option attributes, and HTML forms. If you want to retrieve this content, for whatever reason, set stripped to False, and it will return a list of the unwanted strings along with formatted_tables.
 
 * `utility.py', a set of utilities that aid in parsing for complicated table formats.
   *'clean(*formatted_table*)`
----Attempts to correct for most common cause of failure of DataFrame conversion in `get_table_from`. Usually, this is because the table column headers span multiple cells while the actual cells below them do not, leading to a mis-match the between the number of columns `pandas` thinks the table should have and the actual number of columns provided to it. 
+   Attempts to correct for most common cause of failure of DataFrame conversion in `get_table_from`. Usually, this is because the table column headers span multiple cells while the actual cells below them do not, leading to a mis-match the between the number of columns `pandas` thinks the table should have and the actual number of columns provided to it. 
 
----To solve this, `clean` simply loops over the first row of each table and converts joined columns (usually columns with '/' in them) into separate individual columns. In most cases, this should suffice to permit conversion to DataFrame.
+   To solve this, `clean` simply loops over the first row of each table and converts joined columns (usually columns with '/' in them) into separate individual columns. In most cases, this should suffice to permit conversion to DataFrame.
+
+# Example Usage
+
+Let `page` be our page in raw HTML format.
+
+Then we can convert tables on that document to DataFrames by
+
+```python
+import scraper
+
+table = get_table_from(page)
+```
+If the function fails to convert the tables to a DataFrame format, you can try running with `cleaned = True`.
+
+```python
+table = get_table_from(page,cleaned=True)
+```
+
+This should solve most problems. Please post an issue if this does not work for your specific use.
