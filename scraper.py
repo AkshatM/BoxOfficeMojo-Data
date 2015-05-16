@@ -16,27 +16,27 @@ def get_table_from(page_html,cleaned = False,stripped=True):
 
     identifier = '#dcdcdc'
 
-    strainer = BeautifulSoup(page_html,parse_only=SoupStrainer("table"))
+    strainer = BeautifulSoup(page_html,parse_only=SoupStrainer("table")) #reduces page parsing time by searching for only tables
 
     raw_tables = strainer.find_all(lambda tag: tag.name == 'table' and
                                    tag.tr.has_attr('bgcolor') and
-                                   tag.tr['bgcolor'] == identifier)
+                                   tag.tr['bgcolor'] == identifier) # finds subset of tables matching our identifier
         
     unwanted_objects = [undesired_object.extract() for table in raw_tables
-                        for undesired_object in table(["script","option","table","form"])]
+                        for undesired_object in table(["script","option","table","form"])] # gets rid of nested tables, Javascript tags and forms
         
     formatted_tables = [[[item.text.rstrip('\n') for item in row.find_all("td")]
-                         for row in table.find_all("tr")] for table in raw_tables]
+                         for row in table.find_all("tr")] for table in raw_tables] # returns a list of lists comprising table text with clear formatting e.g. newline characters stripped, etc.
         
     try:
-        formatted_tables = [DataFrame(table[1:],columns = table[0]) for table in formatted_tables]
+        formatted_tables = [DataFrame(table[1:],columns = table[0]) for table in formatted_tables] #attempts conversion to DataFrame
     except Exception as ex:
-        print("Failed to convert to DataFrame object. Returning as nested list...")
-        print("Error returned was: "+str(ex))
+        print("Failed to convert to DataFrame object. Returning as nested list...") #warns if DataFrame conversion fails
+        print("Error returned was: "+str(ex)) # lets you know what the error was without preventing further execution of code
         
     if cleaned == True:
         from utilities import clean
-        formatted_tables = clean(formatted_tables)
+        formatted_tables = clean(formatted_tables) # attempts to force DataFrame conversion
 
     if stripped == True:
         return formatted_tables

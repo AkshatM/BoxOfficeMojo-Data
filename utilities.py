@@ -15,7 +15,7 @@ def clean(formatted_tables):
         if len(table[0]) < maximum_length:
             table[0] = [lone_header_tag for header in table[0] for lone_header_tag in header.split('/')]
 
-    formatted_tables = [DataFrame([row if (len(row) == maximum_length) for row in table[1:]],columns=table[0]) for table in formatted_tables]
+    formatted_tables = [DataFrame([row for row in table[1:] if (len(row) == maximum_length)],columns=table[0]) for table in formatted_tables]
 
     return formatted_tables
 
