@@ -34,8 +34,8 @@ This repository currently contains:
 
    This strips a lot of content that might be unwanted. Unwanted content include nested tables, Javascript script and option attributes, and HTML forms. If you want to retrieve this content, for whatever reason, set stripped to False, and it will return a list of the unwanted strings along with formatted_tables.
 
-* `utility.py`, a set of utilities that aid in parsing for complicated table formats.
-   *'clean(*formatted_table*)`
+* `utility.py`, a set of utilities that aid in parsing for complicated table formats. 
+    *'clean(*formatted_table*)`
 
    Attempts to correct for most common cause of failure of DataFrame conversion in `get_table_from`. Usually, this is because the table column headers span multiple cells while the actual cells below them do not, leading to a mis-match the between the number of columns `pandas` thinks the table should have and the actual number of columns provided to it. 
 
@@ -50,12 +50,12 @@ Then we can convert tables on that document to DataFrames by
 ```python
 import scraper
 
-table = get_table_from(page)
+table = scraper.get_table_from(page)
 ```
-If the function fails to convert the tables to a DataFrame format, you can try running with `cleaned = True`.
+If the function fails to convert the tables to a DataFrame format (it'll provide an error _that doesn't prevent assignment_, so you'll have either a series of nested lists or a DataFrame to work with), you can try running with `cleaned = True` instead.
 
 ```python
 table = get_table_from(page,cleaned=True)
 ```
 
-This should solve most problems. Please post an issue if this does not work for your specific use.
+This should solve most problems. `cleaned = True` imports `utilities.py` internally, so please make sure both files are on your Python path. Please post an issue if this does not work for your specific use.
