@@ -34,7 +34,7 @@ This repository currently contains:
 
    This strips a lot of content that might be unwanted. Unwanted content include nested tables, Javascript script and option attributes, and HTML forms. If you want to retrieve this content, for whatever reason, set stripped to False, and it will return a list of the unwanted strings along with formatted_tables.
 
-* `utility.py', a set of utilities that aid in parsing for complicated table formats.
+* `utility.py`, a set of utilities that aid in parsing for complicated table formats.
   *'clean(*formatted_table*)`
 
    Attempts to correct for most common cause of failure of DataFrame conversion in `get_table_from`. Usually, this is because the table column headers span multiple cells while the actual cells below them do not, leading to a mis-match the between the number of columns `pandas` thinks the table should have and the actual number of columns provided to it. 
