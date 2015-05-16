@@ -36,6 +36,7 @@ This repository currently contains:
 
 * `utility.py', a set of utilities that aid in parsing for complicated table formats.
   *'clean(*formatted_table*)`
+
    Attempts to correct for most common cause of failure of DataFrame conversion in `get_table_from`. Usually, this is because the table column headers span multiple cells while the actual cells below them do not, leading to a mis-match the between the number of columns `pandas` thinks the table should have and the actual number of columns provided to it. 
 
    To solve this, `clean` simply loops over the first row of each table and converts joined columns (usually columns with '/' in them) into separate individual columns. In most cases, this should suffice to permit conversion to DataFrame.
