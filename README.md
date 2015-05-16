@@ -24,7 +24,7 @@ As of now, BoxOfficeMojo-Data functions depend on:
 
 This repository currently contains:
 * `scraper.py`, a collection of parsing functions
-   * `get_table_from(*page_html*, _cleaned_ = False, _stripped_ = True)`
+   * `get_table_from(page_html, _cleaned_ = False, _stripped_ = True)`
 
    Returns formatted_tables, a list of DataFrame objects corresponding to tables on the page_html corresponding to a BOM page format.
 
@@ -35,7 +35,7 @@ This repository currently contains:
    This strips a lot of content that might be unwanted. Unwanted content include nested tables, Javascript script and option attributes, and HTML forms. If you want to retrieve this content, for whatever reason, set stripped to False, and it will return a list of the unwanted strings along with formatted_tables.
 
 * `utility.py`, a set of utilities that aid in parsing for complicated table formats. 
-    *'clean(*formatted_table*)`
+   * `clean(formatted_table)`
 
    Attempts to correct for most common cause of failure of DataFrame conversion in `get_table_from`. Usually, this is because the table column headers span multiple cells while the actual cells below them do not, leading to a mis-match the between the number of columns `pandas` thinks the table should have and the actual number of columns provided to it. 
 
