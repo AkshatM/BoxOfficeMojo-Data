@@ -47,15 +47,49 @@ This repository currently contains:
 
 # Example Usage
 
-Let `page` be our page in raw HTML format.
+Let `page` be our page in raw HTML format. Here's an example table on `page` presented below.
 
-Then we can convert tables on that document to DataFrames by
+```html
+<table border="0" cellspacing="0" cellpadding="5" class="chart-wide">
+<tr bgcolor="#dcdcdc">
+<td align="center"><font size="2\"><a href="/movies/?page=weekend&id=et.htm&sort=date&order=DESC&p=.htm"><b>Date<br>(click to view chart)</b></a></font></td>
+<td align="center"><font size="2"><a href="/movies/?page=weekend&id=et.htm&sort=rank&order=ASC&p=.htm">Rank</a></font></td>
+<td align="center"><font size="2"><a href="/movies/?page=weekend&id=et.htm&sort=rank&order=ASC&p=.htm">Movie</a></font></td>
+</tr>
+<tr bgcolor="#f4f4ff">
+<td><nobr><font size="2"><a href="/weekend/chart/?yr=1982&wknd=26&p=.htm"><b>Jun 18&#150;20</b></a></font></nobr></td>
+<td align="center"><font size="2">1</font></td>
+<td align="center"><font size="2">Bar</font></td>
+</tr>
+</table>
+```
+
+Hard to read, right? No idea what's going on?
+
+We can convert tables on that document to DataFrames by simply running
 
 ```python
 import scraper
 
 table = scraper.get_table_from(page)
 ```
+
+and we get, when we call `table` 
+
+```python
+[  Date(click to view chart) Rank Movie
+0                 Jun 18?20    1   Bar]
+```
+
+Then we can convert tables on that document to DataFrames by
+
+
+```python
+import scraper
+
+table = scraper.get_table_from(page)
+```
+
 If the function fails to convert the tables to a DataFrame format (it'll provide an error _that doesn't prevent assignment_, so you'll have either a series of nested lists or a DataFrame to work with), you can try running with `cleaned = True` instead.
 
 ```python
@@ -63,3 +97,7 @@ table = get_table_from(page,cleaned=True)
 ```
 
 This should solve most problems. `cleaned = True` imports `utilities.py` internally, so please make sure both files are on your Python path. Please post an issue if this does not work for your specific use.
+
+# Extensions
+
+If you aren't interested in using this for BoxOfficeMojo-like pages, you can pretty much also rewrite this for your own specific tables. Probably the only thing you'll need to change is the `identifier` variable in `scraper.py` which identifies the desired table by its attributes.
